@@ -116,9 +116,9 @@ extension EditorSession {
         // A traced outline already lies on the canvas, so a new selection skips the clip to
         // the canvas, which is costly for a detailed outline.
         if mode == .replace {
-            setSelection(DocumentSelection(path: path, antialiased: selectionAntialiased), name: "Magic Wand")
+            setSelection(DocumentSelection(path: path, antialiased: selectionAntialiased), name: String(localized: "Magic Wand"))
         } else {
-            applySelection(path, mode: mode, name: "Magic Wand")
+            applySelection(path, mode: mode, name: String(localized: "Magic Wand"))
         }
     }
 

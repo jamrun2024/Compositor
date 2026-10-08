@@ -74,7 +74,7 @@ final class CompositorApplicationDelegate: NSObject, NSApplicationDelegate {
             guard let menu = note.object as? NSMenu, let index = note.userInfo?["NSMenuItemIndex"] as? Int else { return }
             MainActor.assumeIsolated { Self.removeIfSystemExtra(at: index, in: menu) }
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [updater] in updater.startUpdater() }
+        // This edition has no update feed of its own, so Sparkle stays off rather than offering the English build.
     }
 
     /// Black over everything but the window's inside in Canvas Only: the screen around it, its rounded corners and the

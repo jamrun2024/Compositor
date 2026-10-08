@@ -130,7 +130,7 @@ struct ColorPickerSheet: View {
                 hsb.setRGB(rgb)
             })
         return GridRow {
-            Text(label).frame(width: 14, alignment: .leading)
+            Text(label.localized).frame(width: 14, alignment: .leading)
                 .scrubbable(sensitivity: 1, value: channelValue, range: 0...255)
             TextField(label, value: channelValue, format: .number)
                 .frame(width: 52)
@@ -197,7 +197,7 @@ struct DialogColorSwatch: View {
     let session: EditorSession
     var body: some View {
         Button {
-            session.openDialogColorPicker(title: title, color: color) { color = $0 }
+            session.openDialogColorPicker(title: title.localized, color: color) { color = $0 }
         } label: {
             let shape = RoundedRectangle(cornerRadius: 4, style: .continuous)
             shape.fill(color.swiftUI)
@@ -207,7 +207,7 @@ struct DialogColorSwatch: View {
                 .contentShape(shape)
         }
         .buttonStyle(.plain)
-        .accessibilityLabel(title)
+        .accessibilityLabel(title.localized)
         .onChange(of: session.colorPicker?.color) { _, _ in session.previewDialogColor() }
         .onDisappear { Self.closePicker(session) }
     }

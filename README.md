@@ -1,3 +1,30 @@
+# Compositor 中文版
+
+这是 Compositor 的简体中文版。基于 [robbietilton/Compositor](https://github.com/robbietilton/Compositor) **v1.4.7**（commit `af30c45`，2026-10-08）汉化，原项目以 MIT 协议开源，版权归原作者所有。
+
+### 和原版有什么不同
+
+- 菜单、面板、对话框、提示文字、撤销记录、PSD 转换报告都已翻译成简体中文，术语参照 Photoshop 中文版。
+- 菜单栏「Compositor › 语言」可以选择跟随系统、简体中文或 English，重新打开应用后生效。默认是简体中文。
+- 命令搜索（⌘F）输入中文或英文都能找到对应命令。
+- 关闭了自动更新，避免被更新回英文原版。新版本请到本仓库的 [Releases](https://github.com/jamrun2024/Compositor/releases) 下载。
+- 项目文件（.comp）格式和原版完全相同，两个版本可以互相打开。
+
+### 安装
+
+1. 在 [Releases](https://github.com/jamrun2024/Compositor/releases/latest) 下载 `.dmg`，打开后把 Compositor 拖进「应用程序」。
+2. 这个版本没有经过 Apple 公证，第一次打开会提示无法验证开发者。在「应用程序」里按住 Control 点按 Compositor，选「打开」，再点一次「打开」即可。如果还是打不开，到「系统设置 › 隐私与安全性」底部点「仍要打开」，或在终端运行：
+
+   ```sh
+   xattr -dr com.apple.quarantine /Applications/Compositor.app
+   ```
+
+3. 需要 macOS 26 或更高版本。应用文件名和原版相同，装进「应用程序」会替换掉已安装的英文原版。
+
+以下是原项目的英文说明。
+
+---
+
 # Compositor
 
 Adobe Photoshop costs too much and tools like GIMP don’t feel familiar enough for me to stay in flow. That’s why I built Compositor.

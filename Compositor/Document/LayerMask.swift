@@ -30,7 +30,7 @@ nonisolated struct LayerMask: Equatable, @unchecked Sendable {
               let image = CGImage(width: 1, height: 1, bitsPerComponent: 8, bitsPerPixel: 8, bytesPerRow: 1,
                 space: CGColorSpaceCreateDeviceGray(), bitmapInfo: CGBitmapInfo(rawValue: CGImageAlphaInfo.none.rawValue),
                 provider: provider, decode: nil, shouldInterpolate: false, intent: .defaultIntent) else { return nil }
-        return LayerMask(asset: ImportedImage(image: image, thumbnail: image, name: "Layer Mask"))
+        return LayerMask(asset: ImportedImage(image: image, thumbnail: image, name: String(localized: "Layer Mask")))
     }
     static func asset(from image: CGImage) throws -> ImportedImage {
         guard isValid(image) else { throw ProjectError.invalid }
@@ -44,7 +44,7 @@ nonisolated struct LayerMask: Equatable, @unchecked Sendable {
         context.setFillColor(gray: 1, alpha: 1)
         context.fill(bounds)
         guard let thumbnail = context.makeImage() else { throw ExportError.render }
-        return ImportedImage(image: image, thumbnail: thumbnail, name: "Layer Mask")
+        return ImportedImage(image: image, thumbnail: thumbnail, name: String(localized: "Layer Mask"))
     }
 
     // MARK: Placement
@@ -288,7 +288,7 @@ extension EditorSession {
         guard canEditMask, activeLayer?.mask != nil,
               let index = document?.layers.firstIndex(where: { $0.id == activeLayerID }) else { return }
         finishOpacityEdit()
-        beginEdit("Delete Layer Mask")
+        beginEdit(String(localized: "Delete Layer Mask"))
         document?.layers[index].mask = nil
         isMaskSelected = false
         endEdit()
@@ -356,7 +356,7 @@ extension EditorSession {
                                                      background: LayerMask.background(of: mask.asset.thumbnail))
                 let asset = moved.image === mask.asset.image ? mask.asset : try LayerMask.asset(from: moved.image)
                 finishOpacityEdit()
-                beginEdit("Distort Layer Mask")
+                beginEdit(String(localized: "Distort Layer Mask"))
                 document?.layers[index].mask = LayerMask(asset: asset, isEnabled: mask.isEnabled,
                     placement: moved.transform.samePlacement(as: layer.transform) ? nil : moved.transform, isLinked: mask.isLinked)
                 endEdit()
@@ -366,7 +366,7 @@ extension EditorSession {
         let placement = edit.draft.samePlacement(as: layer.transform) ? nil : edit.draft
         guard placement != mask.placement else { return }
         finishOpacityEdit()
-        beginEdit("Transform Layer Mask")
+        beginEdit(String(localized: "Transform Layer Mask"))
         document?.layers[index].mask?.placement = placement
         endEdit()
     }

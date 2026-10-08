@@ -84,7 +84,7 @@ final class CommandPaletteController {
         if isOpen { close(); return }
         self.window = window
         let bar = menu ?? NSApp.mainMenu
-        let entries = (bar.map { CommandPaletteMenu.entries(in: $0, skipping: Self.skipped) } ?? []) + CommandPaletteEntry.layerCommands(for: session)
+        let entries = (bar.map { CommandPaletteMenu.entries(in: $0, skipping: Self.skipped.union(Self.skipped.map(\.localized))) } ?? []) + CommandPaletteEntry.layerCommands(for: session)
             + CommandPaletteEntry.tools(for: session)
         let model = CommandPaletteModel(entries: entries)
         let panel = self.panel ?? makePanel()

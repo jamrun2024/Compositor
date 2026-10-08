@@ -290,9 +290,9 @@ extension EditorSession {
             return
         }
         if mode == .replace {
-            setSelection(DocumentSelection(path: path, antialiased: selectionAntialiased), name: "Object Selection")
+            setSelection(DocumentSelection(path: path, antialiased: selectionAntialiased), name: String(localized: "Object Selection"))
         } else {
-            applySelection(path, mode: mode, name: "Object Selection")
+            applySelection(path, mode: mode, name: String(localized: "Object Selection"))
         }
     }
 }

@@ -267,7 +267,7 @@ private struct OverflowTabsPill: View {
     private var label: String { projectTabOverflowLabel(for: hiddenIDs.count) }
     var body: some View {
         HStack(spacing: 4) {
-            Text(label).font(.system(size: 12, weight: .medium))
+            Text(label.localized).font(.system(size: 12, weight: .medium))
             Image(systemName: "chevron.down").font(.system(size: 9, weight: .medium))
         }
         .padding(.horizontal, 11)
@@ -284,7 +284,7 @@ private struct OverflowTabsPill: View {
                 }
             }
         })
-        .help(label)
+        .help(label.localized)
         .accessibilityIdentifier("projectTabsOverflow")
     }
 }
@@ -296,7 +296,7 @@ private struct OverflowMenuAnchor: NSViewRepresentable {
     func makeNSView(context: Context) -> AnchorView { AnchorView() }
     func updateNSView(_ view: AnchorView, context: Context) {
         view.items = items
-        view.setAccessibilityLabel(label)
+        view.setAccessibilityLabel(label.localized)
     }
     final class AnchorView: NSView {
         var items: () -> [(title: String, action: () -> Void)] = { [] }

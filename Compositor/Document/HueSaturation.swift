@@ -532,7 +532,7 @@ extension EditorSession {
         guard let adjusted = await adjustedPixels(job),
               let index = document?.layers.firstIndex(where: { $0.id == edit.layerID }),
               let current = document?.layers[index], current.asset?.image === edit.original.image else { return }
-        beginEdit("Hue/Saturation")
+        beginEdit(String(localized: "Hue/Saturation"))
         document?.layers[index] = ImageLayer(id: current.id,
             asset: ImportedImage(image: adjusted.image, thumbnail: adjusted.thumbnail ?? adjusted.image, name: current.name),
             name: current.name, isVisible: current.isVisible, transform: current.transform, parentID: current.parentID,

@@ -88,7 +88,8 @@ enum CommandPaletteSearch {
     /// order, enabled first.
     static func rank(_ entries: [CommandPaletteEntry], query: String) -> [CommandPaletteEntry] {
         let scored = entries.enumerated().compactMap { index, entry in
-            score(query, in: entry.title).map { (entry, $0, index) }
+            let english = entry.title.components(separatedBy: " › ").map(\.inEnglish).joined(separator: " › ")
+            return [score(query, in: entry.title), score(query, in: english)].compactMap { $0 }.max().map { (entry, $0, index) }
         }
         return scored.sorted { a, b in
             if a.0.isEnabled != b.0.isEnabled { return a.0.isEnabled }
@@ -177,9 +178,11 @@ extension CommandPaletteEntry {
         let selected = session.selection != nil
         return [
             CommandPaletteEntry(id: selected ? "Layer › Add Layer Mask from Selection" : "Layer › Add Layer Mask",
+                                title: "\("Layer".localized) › \((selected ? "Add Layer Mask from Selection" : "Add Layer Mask").localized)",
                                 shortcut: nil, isEnabled: canAdd,
                                 perform: { [weak session] in session?.addMask(revealing: true) }),
             CommandPaletteEntry(id: selected ? "Layer › Add Layer Mask Hiding Selection" : "Layer › Add Layer Mask (Hide All)",
+                                title: "\("Layer".localized) › \((selected ? "Add Layer Mask Hiding Selection" : "Add Layer Mask (Hide All)").localized)",
                                 shortcut: nil, isEnabled: canAdd,
                                 perform: { [weak session] in session?.addMask(revealing: false) }),
         ]
@@ -216,7 +219,7 @@ extension CommandPaletteEntry {
             ("Zoom", "Z", .zoom, nil),
         ]
         return tools.map { name, key, tool, setup in
-            CommandPaletteEntry(id: "Tool › \(name)", shortcut: key, isEnabled: session.document != nil,
+            CommandPaletteEntry(id: "Tool › \(name)", title: "\("Tool".localized) › \(name.localized)", shortcut: key, isEnabled: session.document != nil,
                                 perform: { [weak session] in
                                     guard let session else { return }
                                     session.selectTool(tool)

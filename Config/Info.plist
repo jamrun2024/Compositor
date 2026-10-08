@@ -38,6 +38,13 @@
 			<true/>
 		</dict>
 	</array>
+	<key>CFBundleDisplayName</key>
+	<string>Compositor 中文版</string>
+	<key>CFBundleLocalizations</key>
+	<array>
+		<string>en</string>
+		<string>zh-Hans</string>
+	</array>
 	<key>SUEnableInstallerLauncherService</key>
 	<true/>
 	<key>SUFeedURL</key>
@@ -45,7 +52,7 @@
 	<key>SUPublicEDKey</key>
 	<string>KZvD724t8QpzTR4OGrHrsCWt538TJ/g/qrTZii+o214=</string>
 	<key>SUEnableAutomaticChecks</key>
-	<true/>
+	<false/>
 	<key>UTExportedTypeDeclarations</key>
 	<array>
 		<dict>
